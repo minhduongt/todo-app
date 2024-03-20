@@ -1,5 +1,7 @@
 import { TTodo } from "@/types/todo";
 import Todo from "./Todo";
+import { motion, AnimatePresence } from "framer-motion";
+import { listVar } from "../motion/listVar";
 
 type TTodoListProps = {
   todoList: TTodo[];
@@ -17,15 +19,26 @@ export default function TodoList({
   return (
     <>
       {todoList.length > 0 ? (
-        todoList.map((todo) => (
-          <Todo
-            key={todo.id}
-            todo={todo}
-            removeTodo={removeTodo}
-            changeTodoStatus={changeTodoStatus}
-            editTodo={editTodo}
-          />
-        ))
+        <motion.ul>
+          <AnimatePresence mode={"popLayout"}>
+            {todoList.map((todo, index) => (
+              <motion.li
+                key={todo.id}
+                variants={listVar(index).item}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+              >
+                <Todo
+                  todo={todo}
+                  removeTodo={removeTodo}
+                  changeTodoStatus={changeTodoStatus}
+                  editTodo={editTodo}
+                />
+              </motion.li>
+            ))}{" "}
+          </AnimatePresence>
+        </motion.ul>
       ) : (
         <p>No task.</p>
       )}

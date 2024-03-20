@@ -1,17 +1,17 @@
 export const TODO_APP_STORAGE_KEY = "TODO_APP";
 
 export enum TodoStatusEnum {
-  INITIAL = 0,
-  INCOMPLETE = 1,
-  INPROGRESS = 2,
-  COMPLETED = 3,
+  INITIAL = 1,
+  INCOMPLETE = 2,
+  INPROGRESS = 3,
+  COMPLETED = 4,
 }
 
 export const TodoStatusEnums = [
   TodoStatusEnum.INITIAL,
-  TodoStatusEnum.COMPLETED,
   TodoStatusEnum.INCOMPLETE,
   TodoStatusEnum.INPROGRESS,
+  TodoStatusEnum.COMPLETED,
 ];
 
 export function getTodoStatusName(status: number) {
@@ -24,6 +24,21 @@ export function getTodoStatusName(status: number) {
       return "In Progress";
     case TodoStatusEnum.COMPLETED:
       return "Completed";
+    default:
+      return "Unknown";
+  }
+}
+
+export function getTodoStatusColor(status: number) {
+  switch (status) {
+    case TodoStatusEnum.INITIAL:
+      return "white";
+    case TodoStatusEnum.INCOMPLETE:
+      return "aqua";
+    case TodoStatusEnum.INPROGRESS:
+      return "yellow";
+    case TodoStatusEnum.COMPLETED:
+      return "lightgreen";
     default:
       return "Unknown";
   }

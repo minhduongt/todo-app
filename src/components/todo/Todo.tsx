@@ -1,5 +1,9 @@
 import { TTodo } from "@/types/todo";
-import { TodoStatusEnum, getTodoStatusName } from "@/utils/constanst";
+import {
+  TodoStatusEnum,
+  getTodoStatusColor,
+  getTodoStatusName,
+} from "@/utils/constanst";
 import styles from "./styles.module.scss";
 import { IconButton } from "../button/IconButton";
 import { TiDeleteOutline } from "react-icons/ti";
@@ -44,7 +48,10 @@ export default function Todo({
     switch (status) {
       case TodoStatusEnum.INCOMPLETE:
         return (
-          <button onClick={() => handleChangeStatus(TodoStatusEnum.INPROGRESS)}>
+          <button
+            style={{ color: getTodoStatusColor(TodoStatusEnum.INPROGRESS) }}
+            onClick={() => handleChangeStatus(TodoStatusEnum.INPROGRESS)}
+          >
             {`Mark as ${getTodoStatusName(TodoStatusEnum.INPROGRESS)}`}
           </button>
         );
@@ -52,11 +59,13 @@ export default function Todo({
         return (
           <>
             <button
+              style={{ color: getTodoStatusColor(TodoStatusEnum.INCOMPLETE) }}
               onClick={() => handleChangeStatus(TodoStatusEnum.INCOMPLETE)}
             >
               {`Mark as ${getTodoStatusName(TodoStatusEnum.INCOMPLETE)}`}
             </button>
             <button
+              style={{ color: getTodoStatusColor(TodoStatusEnum.COMPLETED) }}
               onClick={() => handleChangeStatus(TodoStatusEnum.COMPLETED)}
             >
               {`Mark as ${getTodoStatusName(TodoStatusEnum.COMPLETED)}`}
@@ -65,7 +74,10 @@ export default function Todo({
         );
       case TodoStatusEnum.COMPLETED:
         return (
-          <button onClick={() => handleChangeStatus(TodoStatusEnum.INPROGRESS)}>
+          <button
+            style={{ color: getTodoStatusColor(TodoStatusEnum.INPROGRESS) }}
+            onClick={() => handleChangeStatus(TodoStatusEnum.INPROGRESS)}
+          >
             {`Mark as ${getTodoStatusName(TodoStatusEnum.INPROGRESS)}`}
           </button>
         );
@@ -98,15 +110,15 @@ export default function Todo({
         )}
       </div>
 
-      <p>{getTodoStatusName(todo.status)}</p>
+      <p style={{ color: getTodoStatusColor(todo.status) }}>
+        {getTodoStatusName(todo.status)}
+      </p>
       <div className={styles["stack-center-wrapper"]}>
-        {todo.status === 0 && (
+        {todo.status === TodoStatusEnum.INITIAL ? (
           <button onClick={() => handleChangeStatus(TodoStatusEnum.INCOMPLETE)}>
             Start
           </button>
-        )}
-
-        {todo.status !== TodoStatusEnum.INITIAL && (
+        ) : (
           <>{getChangeStatusButtons(todo.status)}</>
         )}
       </div>

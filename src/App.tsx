@@ -54,7 +54,6 @@ function App() {
 
   function onChangeFilteredStatus(e: React.ChangeEvent<HTMLSelectElement>) {
     const status = e.target.value;
-    console.log("status", status);
 
     if (status !== "NaN") {
       setFilteredStatus(Number.parseInt(status));
@@ -100,15 +99,14 @@ function App() {
     }
   }
   useEffect(() => {
-    if (filteredStatus) {
+    if (filteredStatus !== null) {
       const foundStatus = TodoStatusEnums.find(
         (status) => status === filteredStatus
       );
-      setFilteredTodoList(
-        todoList.filter((todo) => todo.status === foundStatus)
+      const newFilteredList = todoList.filter(
+        (todo) => todo.status === foundStatus
       );
-    } else {
-      setTodoList(todoList);
+      setFilteredTodoList(newFilteredList);
     }
   }, [filteredStatus]);
 
@@ -147,6 +145,7 @@ function App() {
             filteredStatus ? filteredTodoList.length : todoList.length
           }`}</p>
           <button
+            style={{ color: "red" }}
             onClick={() => removeAllTodoByStatus(TodoStatusEnum.COMPLETED)}
             disabled={
               todoList.length > 0 ? getCompletedTodo(todoList).length < 1 : true
@@ -155,10 +154,11 @@ function App() {
             Remove all completed
           </button>
           <button
+            style={{ color: "red" }}
             onClick={() => removeAllTodoByStatus()}
             disabled={todoList.length < 1}
           >
-            Remove all
+            Clear list
           </button>
         </div>
 
