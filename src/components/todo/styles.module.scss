@@ -1,0 +1,37 @@
+.todo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .todo-task {
+        width: 40%;
+        gap: 6px;
+        display: flex;
+        align-items: center;
+    }
+}
+
+.completed-todo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    color: #00af17;
+
+    .todo-task {
+        text-decoration: line-through;
+        width: 40%;
+        gap: 6px;
+        display: flex;
+        align-items: center;
+    }
+}
+
+.stack-center-wrapper {
+    width: 30%;
+    gap: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
